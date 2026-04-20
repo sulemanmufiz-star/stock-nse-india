@@ -1,0 +1,219 @@
+import { DateRange, IntradayData, EquityDetails, EquityTradeInfo, EquityHistoricalData, SeriesData, IndexDetails, EquityOptionChainData, IndexOptionChainData, CommodityOptionChainData, OptionChainContractInfo, EquityCorporateInfo, Glossary, HolidaysBySegment, MarketStatus, MarketTurnover, AllIndicesData, IndexNamesData, CircularsData, LatestCircularData, EquityMaster, PreOpenMarketData, MergedDailyReportsData, TechnicalIndicators, EquityInfo, EquityMetadata, EquitySecurityInfo, EquityPriceInfo, EquityPreOpenMarket, EquityHistoricalInfo, EquityOptionChainItem, IndexEquityInfo, IndexRecords, CommodityRecords, Filtered, Holiday, MarketState, MarketCap, IndicativeNifty50, GiftNifty, Datum, PreOpenDetails, OptionsData, OptionsDetails } from './interface';
+export declare enum ApiList {
+    GLOSSARY = "/api/cmsContent?url=/glossary",
+    HOLIDAY_TRADING = "/api/holiday-master?type=trading",
+    HOLIDAY_CLEARING = "/api/holiday-master?type=clearing",
+    MARKET_STATUS = "/api/marketStatus",
+    MARKET_TURNOVER = "/api/market-turnover",
+    ALL_INDICES = "/api/allIndices",
+    INDEX_NAMES = "/api/index-names",
+    CIRCULARS = "/api/circulars",
+    LATEST_CIRCULARS = "/api/latest-circular",
+    EQUITY_MASTER = "/api/equity-master",
+    MARKET_DATA_PRE_OPEN = "/api/market-data-pre-open?key=ALL",
+    MERGED_DAILY_REPORTS_CAPITAL = "/api/merged-daily-reports?key=favCapital",
+    MERGED_DAILY_REPORTS_DERIVATIVES = "/api/merged-daily-reports?key=favDerivatives",
+    MERGED_DAILY_REPORTS_DEBT = "/api/merged-daily-reports?key=favDebt"
+}
+export declare class NseIndia {
+    private readonly baseUrl;
+    private readonly cookieMaxAge;
+    private readonly baseHeaders;
+    private userAgent;
+    private cookies;
+    private cookieUsedCount;
+    private cookieExpiry;
+    private noOfConnections;
+    private getNseCookies;
+    /**
+     *
+     * @param url NSE API's URL
+     * @returns JSON data from NSE India
+     */
+    getData(url: string): Promise<any>;
+    /**
+     *
+     * @param apiEndpoint
+     * @returns
+     */
+    getDataByEndpoint(apiEndpoint: string): Promise<any>;
+    /**
+     *
+     * @returns List of NSE equity symbols
+     */
+    getAllStockSymbols(): Promise<string[]>;
+    /**
+     *
+     * @param symbol
+     * @returns
+     */
+    getEquityDetails(symbol: string): Promise<EquityDetails>;
+    /**
+     *
+     * @param symbol
+     * @returns
+     */
+    getEquityTradeInfo(symbol: string): Promise<EquityTradeInfo>;
+    /**
+     *
+     * @param symbol
+     * @returns
+     */
+    getEquityCorporateInfo(symbol: string): Promise<EquityCorporateInfo>;
+    /**
+     *
+     * @param symbol
+     * @returns
+     */
+    getEquityIntradayData(symbol: string): Promise<IntradayData>;
+    /**
+     *
+     * @param symbol
+     * @param range
+     * @returns
+     */
+    getEquityHistoricalData(symbol: string, range?: DateRange): Promise<EquityHistoricalData[]>;
+    /**
+     *
+     * @param symbol
+     * @returns
+     */
+    getEquitySeries(symbol: string): Promise<SeriesData>;
+    /**
+     *
+     * @param index
+     * @returns
+     */
+    getEquityStockIndices(index: string): Promise<IndexDetails>;
+    /**
+     *
+     * @param index
+     * @returns
+     */
+    getIndexIntradayData(index: string): Promise<IntradayData>;
+    /**
+     * Get option chain contract information (expiry dates and strike prices) for an index
+     *
+     * @param indexSymbol
+     * @returns
+     */
+    getIndexOptionChainContractInfo(indexSymbol: string): Promise<OptionChainContractInfo>;
+    /**
+     *
+     * @param indexSymbol
+     * @param expiry Optional expiry date in DD-MMM-YYYY format (e.g., "23-Dec-2025").
+     *               If not provided, will fetch nearest upcoming expiry
+     * @returns
+     */
+    getIndexOptionChain(indexSymbol: string, expiry?: string): Promise<IndexOptionChainData>;
+    /**
+     *
+     * @param symbol
+     * @returns
+     */
+    getEquityOptionChain(symbol: string): Promise<EquityOptionChainData>;
+    /**
+         *
+         * @param symbol
+         * @returns
+         */
+    getCommodityOptionChain(symbol: string): Promise<CommodityOptionChainData>;
+    /**
+     * Get NSE glossary content
+     * @returns Glossary content
+     */
+    getGlossary(): Promise<Glossary>;
+    /**
+     * Get trading holidays
+     * @returns List of trading holidays
+     */
+    getTradingHolidays(): Promise<HolidaysBySegment>;
+    /**
+     * Get clearing holidays
+     * @returns List of clearing holidays
+     */
+    getClearingHolidays(): Promise<HolidaysBySegment>;
+    /**
+     * Get market status
+     * @returns Current market status
+     */
+    getMarketStatus(): Promise<MarketStatus>;
+    /**
+     * Get market turnover
+     * @returns Market turnover data
+     */
+    getMarketTurnover(): Promise<MarketTurnover>;
+    /**
+     * Get all indices
+     * @returns List of all indices
+     */
+    getAllIndices(): Promise<AllIndicesData>;
+    /**
+     * Get index names
+     * @returns List of index names
+     */
+    getIndexNames(): Promise<IndexNamesData>;
+    /**
+     * Get circulars
+     * @returns List of circulars
+     */
+    getCirculars(): Promise<CircularsData>;
+    /**
+     * Get latest circulars
+     * @returns List of latest circulars
+     */
+    getLatestCirculars(): Promise<LatestCircularData>;
+    /**
+     * Get equity master
+     * @returns Equity master data with categorized indices
+     */
+    getEquityMaster(): Promise<EquityMaster>;
+    /**
+     * Get pre-open market data
+     * @returns Pre-open market data
+     */
+    getPreOpenMarketData(): Promise<PreOpenMarketData>;
+    /**
+     * Get merged daily reports for capital market
+     * @returns Daily reports for capital market
+     */
+    getMergedDailyReportsCapital(): Promise<MergedDailyReportsData[]>;
+    /**
+     * Get merged daily reports for derivatives
+     * @returns Daily reports for derivatives
+     */
+    getMergedDailyReportsDerivatives(): Promise<MergedDailyReportsData[]>;
+    /**
+     * Get merged daily reports for debt market
+     * @returns Daily reports for debt market
+     */
+    getMergedDailyReportsDebt(): Promise<MergedDailyReportsData[]>;
+    /**
+     * Get technical indicators for a specific equity symbol
+     * @param symbol - The equity symbol (e.g., 'RELIANCE', 'TCS')
+     * @param period - Number of days for historical data (default: 200)
+     * @param options - Optional configuration for indicators
+     * @returns Promise<TechnicalIndicators>
+     */
+    getTechnicalIndicators(symbol: string, period?: number, options?: {
+        smaPeriods?: number[];
+        emaPeriods?: number[];
+        rsiPeriod?: number;
+        macdFast?: number;
+        macdSlow?: number;
+        macdSignal?: number;
+        bbPeriod?: number;
+        bbStdDev?: number;
+        stochK?: number;
+        stochD?: number;
+        williamsRPeriod?: number;
+        atrPeriod?: number;
+        adxPeriod?: number;
+        cciPeriod?: number;
+        mfiPeriod?: number;
+        rocPeriod?: number;
+        momentumPeriod?: number;
+    }): Promise<TechnicalIndicators>;
+}
+export type { DateRange, IntradayData, EquityDetails, EquityTradeInfo, EquityHistoricalData, SeriesData, IndexDetails, EquityOptionChainData, IndexOptionChainData, CommodityOptionChainData, OptionChainContractInfo, EquityCorporateInfo, Glossary, HolidaysBySegment, MarketStatus, MarketTurnover, AllIndicesData, IndexNamesData, CircularsData, LatestCircularData, EquityMaster, PreOpenMarketData, MergedDailyReportsData, TechnicalIndicators, EquityInfo, EquityMetadata, EquitySecurityInfo, EquityPriceInfo, EquityPreOpenMarket, EquityHistoricalInfo, EquityOptionChainItem, IndexEquityInfo, IndexRecords, CommodityRecords, Filtered, Holiday, MarketState, MarketCap, IndicativeNifty50, GiftNifty, Datum, PreOpenDetails, OptionsData, OptionsDetails };
+//# sourceMappingURL=index.d.ts.map
