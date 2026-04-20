@@ -2284,10 +2284,144 @@ mainRouter.get('/api/mcp/session/:sessionId/openai-messages', async (req, res) =
 })
 
 // our custom sector route
-mainRouter.get('/api/test123', async (_req, res) => {
-    res.json({
-        success: true,
-        message: "test route working"
-    });
+
+mainRouter.get('/api/sector-monitor', async (_req, res) => {
+    try {
+        const sectorStocks = {
+            "NIFTY IT": [
+                "TCS",
+                "INFY",
+                "WIPRO",
+                "HCLTECH",
+                "TECHM",
+                "LTIM",
+                "PERSISTENT",
+                "MPHASIS",
+                "COFORGE",
+                "OFSS"
+            ],
+
+            "NIFTY AUTO": [
+                "TATAMOTORS",
+                "MARUTI",
+                "M&M",
+                "BAJAJ-AUTO",
+                "EICHERMOT",
+                "HEROMOTOCO",
+                "TVSMOTOR",
+                "ASHOKLEY",
+                "BALKRISIND",
+                "BOSCHLTD"
+            ],
+
+            "NIFTY BANK": [
+                "HDFCBANK",
+                "ICICIBANK",
+                "SBIN",
+                "AXISBANK",
+                "KOTAKBANK",
+                "INDUSINDBK",
+                "BANKBARODA",
+                "PNB",
+                "AUBANK",
+                "FEDERALBNK"
+            ],
+
+            "NIFTY PHARMA": [
+                "SUNPHARMA",
+                "DIVISLAB",
+                "DRREDDY",
+                "CIPLA",
+                "LUPIN",
+                "AUROPHARMA",
+                "TORNTPHARM",
+                "ALKEM",
+                "BIOCON",
+                "ZYDUSLIFE"
+            ],
+
+            "NIFTY FMCG": [
+                "HINDUNILVR",
+                "ITC",
+                "NESTLEIND",
+                "BRITANNIA",
+                "DABUR",
+                "GODREJCP",
+                "TATACONSUM",
+                "COLPAL",
+                "MARICO",
+                "UBL"
+            ]
+        };
+
+        let allStocks: any[] = [];
+
+        for (const sector in sectorStocks) {
+            const symbols = sectorStocks[sector];
+
+            for (const symbol of symbols) {
+                try {
+                    const data: any = await nseIndia.getEquityDetails(symbol);
+
+                    allStocks.push({
+                        sector,
+                        symbol,
+                        open: data?.priceInfo?.open || 0,
+                        ltp: data?.priceInfo?.lastPrice || 0,
+                        close: data?.priceInfo?.close || 0,
+                        high: data?.priceInfo?.intraDayHighLow?.max || 0,
+                        low: data?.priceInfo?.intraDayHighLow?.min || 0,
+                        prevClose: data?.priceInfo?.previousClose || 0,
+                        changePercent: Number(data?.priceInfo?.pChange || 0)
+                    });
+
+                    await new Promise(resolve => setTimeout(resolve, 700));
+
+                } catch (error) {
+                    console.log(`Failed fetching ${symbol}`);
+                }
+            }
+        }
+
+        let sectorRanking: any[] = [];
+
+        for (const sector in sectorStocks) {
+            const sectorData = allStocks
+                .filter(stock => stock.sector === sector)
+                .sort((a, b) => b.changePercent - a.changePercent)
+                .slice(0, 10);
+
+            const avgMomentum =
+                sectorData.reduce((sum, stock) => sum + stock.changePercent, 0) /
+                (sectorData.length || 1);
+
+            sectorRanking.push({
+                sector,
+                avgMomentum: Number(avgMomentum.toFixed(2)),
+                topStocks: sectorData
+            });
+        }
+
+        sectorRanking = sectorRanking.sort(
+            (a, b) => b.avgMomentum - a.avgMomentum
+        );
+
+        res.json({
+            success: true,
+            lastUpdated: new Date(),
+            topSectors: sectorRanking.slice(0, 5),
+            allSectorRanking: sectorRanking
+        });
+
+    } catch (error) {
+        console.log(error);
+
+        res.status(500).json({
+            success: false,
+            error: "Sector monitor failed"
+        });
+    }
 });
+
+//code ended here
 export { mainRouter }
