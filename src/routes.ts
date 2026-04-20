@@ -2287,73 +2287,102 @@ mainRouter.get('/api/mcp/session/:sessionId/openai-messages', async (req, res) =
 
 mainRouter.get('/api/sector-monitor', async (_req, res) => {
     try {
-        const sectorStocks = {
-            "NIFTY IT": [
-                "TCS",
-                "INFY",
-                "WIPRO",
-                "HCLTECH",
-                "TECHM",
-                "LTIM",
-                "PERSISTENT",
-                "MPHASIS",
-                "COFORGE",
-                "OFSS"
-            ],
-
-            "NIFTY AUTO": [
-                "TATAMOTORS",
-                "MARUTI",
-                "M&M",
-                "BAJAJ-AUTO",
-                "EICHERMOT",
-                "HEROMOTOCO",
-                "TVSMOTOR",
-                "ASHOKLEY",
-                "BALKRISIND",
-                "BOSCHLTD"
-            ],
-
-            "NIFTY BANK": [
-                "HDFCBANK",
-                "ICICIBANK",
-                "SBIN",
-                "AXISBANK",
-                "KOTAKBANK",
-                "INDUSINDBK",
-                "BANKBARODA",
-                "PNB",
-                "AUBANK",
-                "FEDERALBNK"
-            ],
-
+       const sectorStocks = {
             "NIFTY PHARMA": [
                 "SUNPHARMA",
-                "DIVISLAB",
-                "DRREDDY",
-                "CIPLA",
                 "LUPIN",
+                "CIPLA",
                 "AUROPHARMA",
-                "TORNTPHARM",
-                "ALKEM",
                 "BIOCON",
-                "ZYDUSLIFE"
+                "GLENMARK",
+                "ALKEM",
+                "ZYDUSLIFE",
+                "DRREDDY"
+            ],
+
+            "NIFTY METAL": [
+                "ADANIENT",
+                "JSWSTEEL",
+                "JINDALSTEL",
+                "APLAPOLLO",
+                "HINDALCO",
+                "TATASTEEL",
+                "HINDZINC"
+            ],
+
+            "NIFTY 50": [
+                "TRENT",
+                "BSE",
+                "BHARTIARTL",
+                "DLF",
+                "TCS",
+                "TORNTPHARM",
+                "INFY"
+            ],
+
+            "NIFTY IT": [
+                "PERSISTENT",
+                "COFORGE",
+                "HCLTECH",
+                "TECHM",
+                "WIPRO",
+                "MPHASIS"
             ],
 
             "NIFTY FMCG": [
+                "NESTLEIND",
                 "HINDUNILVR",
                 "ITC",
-                "NESTLEIND",
-                "BRITANNIA",
-                "DABUR",
-                "GODREJCP",
                 "TATACONSUM",
-                "COLPAL",
+                "BRITANNIA",
                 "MARICO",
-                "UBL"
+                "UNITDSPR"
+            ],
+
+            "NIFTY AUTO": [
+                "M&M",
+                "ASHOKLEY",
+                "TVSMOTOR",
+                "TATAMOTORS",
+                "EICHERMOT",
+                "BHARATFORG",
+                "MARUTI",
+                "HEROMOTOCO",
+                "BAJAJ-AUTO",
+                "HYUNDAI"
+            ],
+
+            "NIFTY FIN SERVICE": [
+                "JIOFIN",
+                "SHRIRAMFIN",
+                "HDFCBANK",
+                "SBIN",
+                "KOTAKBANK",
+                "ICICIBANK",
+                "BAJAJFINSV",
+                "BAJFINANCE",
+                "AXISBANK"
+            ],
+
+            "NIFTY ENERGY": [
+                "CGPOWER",
+                "POWERGRID",
+                "RELIANCE",
+                "GODREJPROP",
+                "NTPC",
+                "TATAPOWER",
+                "COALINDIA",
+                "GAIL"
+            ],
+
+            "NIFTY INFRA": [
+                "ULTRACEMCO",
+                "GRASIM",
+                "ONGC",
+                "GODREJCP",
+                "LT"
             ]
         };
-
         let allStocks: any[] = [];
 
 for (const sector of Object.keys(sectorStocks) as (keyof typeof sectorStocks)[]) {
