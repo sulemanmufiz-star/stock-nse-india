@@ -16,8 +16,7 @@ import path from "path";
 import { mainRouter } from "./routes";
 import cors from "cors";
 
-// IMPORTANT: correct import
-import sectorMonitor from "./routes/sectorMonitor";
+
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -57,11 +56,7 @@ Body Parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-/*
-CUSTOM ROUTE REGISTER
-THIS IS THE IMPORTANT PART
-*/
-app.use("/api/sector-monitor", sectorMonitor);
+
 
 /*
 Existing Routes
