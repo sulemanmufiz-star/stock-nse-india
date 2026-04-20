@@ -8,10 +8,10 @@ ENV TZ="Asia/Kolkata"
 ENV NODE_ENV=production
 ENV PORT=3001
 
-# Give tsc more memory + skip engine check
-RUN yarn install --ignore-engines && \
-    NODE_OPTIONS="--max-old-space-size=4096" ./node_modules/.bin/tsc && \
-    ./node_modules/.bin/copyfiles -f "./src/**/*.graphql" build/graphql-schema
+RUN yarn install --ignore-engines --include=dev && \
+    NODE_OPTIONS="--max-old-space-size=4096" npx tsc && \
+    npx copyfiles -f "./src/**/*.graphql" build/graphql-schema && \
+    yarn install --ignore-engines --production
 
 EXPOSE 3001
 
