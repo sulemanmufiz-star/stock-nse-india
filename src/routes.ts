@@ -2283,4 +2283,107 @@ mainRouter.get('/api/mcp/session/:sessionId/openai-messages', async (req, res) =
     }
 })
 
+// our custom sector route
+mainRouter.get('/api/sector-monitor', async (_req, res) => {
+    try {
+        const watchlist = {
+            sectors: {
+                "NIFTY IT": [
+                    "TCS",
+                    "INFY",
+                    "WIPRO",
+                    "HCLTECH",
+                    "TECHM"
+                ],
+
+                "NIFTY AUTO": [
+                    "TATAMOTORS",
+                    "MARUTI",
+                    "M&M",
+                    "BAJAJ-AUTO",
+                    "EICHERMOT"
+                ],
+
+                "NIFTY BANK": [
+                    "HDFCBANK",
+                    "ICICIBANK",
+                    "SBIN",
+                    "AXISBANK",
+                    "KOTAKBANK"
+                ]
+            }
+        }
+
+        let allStocks: any[] = []
+
+        for (const sector in watchlist.sectors) {
+            const symbols = watchlist.sectors[sector]
+
+            for (const symbol of symbols) {
+                try {
+                    const data: any = await nseIndia.getEquityDetails(symbol)
+
+                    allStocks.push({
+                        symbol,
+                        sector,
+                        open: data?.priceInfo?.open || 0,
+                        ltp: data?.priceInfo?.lastPrice || 0,
+                        close: data?.priceInfo?.close || 0,
+                        high: data?.priceInfo?.intraDayHighLow?.max || 0,
+                        low: data?.priceInfo?.intraDayHighLow?.min || 0,
+                        prevClose: data?.priceInfo?.previousClose || 0,
+                        changePercent: data?.priceInfo?.pChange || 0
+                    })
+
+                } catch (error) {
+                    console.log(`Error fetching ${symbol}`)
+                }
+            }
+        }
+
+        let sectorMap: any = {}
+
+        allStocks.forEach(stock => {
+            if (!sectorMap[stock.sector]) {
+                sectorMap[stock.sector] = []
+            }
+
+            sectorMap[stock.sector].push(stock.changePercent)
+        })
+
+        const topSectors = Object.keys(sectorMap)
+            .map(sector => {
+                const avg =
+                    sectorMap[sector].reduce((a: number, b: number) => a + b, 0) /
+                    sectorMap[sector].length
+
+                return {
+                    sector,
+                    avgChange: Number(avg.toFixed(2))
+                }
+            })
+            .sort((a, b) => b.avgChange - a.avgChange)
+            .slice(0, 2)
+
+        const topSectorNames = topSectors.map(x => x.sector)
+
+        const topStocks = allStocks
+            .filter(stock => topSectorNames.includes(stock.sector))
+            .sort((a, b) => b.changePercent - a.changePercent)
+            .slice(0, 10)
+
+        res.json({
+            lastUpdated: new Date(),
+            topSectors,
+            topStocks,
+            allStocks
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            error: "Failed to fetch sector monitor"
+        })
+    }
+})
+// ended here
 export { mainRouter }
