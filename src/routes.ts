@@ -2438,7 +2438,7 @@ for (const sector of Object.keys(sectorStocks) as (keyof typeof sectorStocks)[])
         res.json({
             success: true,
             lastUpdated: new Date(),
-            topSectors: sectorRanking.slice(0, 5),
+            topSectors: sectorRanking,
             allSectorRanking: sectorRanking
         });
 
