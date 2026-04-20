@@ -2284,50 +2284,10 @@ mainRouter.get('/api/mcp/session/:sessionId/openai-messages', async (req, res) =
 })
 
 // our custom sector route
-mainRouter.get('/api/sector-monitor', async (_req, res) => {
-    try {
-        const symbols = [
-            "TCS",
-            "INFY",
-            "HDFCBANK",
-            "ICICIBANK",
-            "TATAMOTORS"
-        ];
-
-        const result = [];
-
-        for (const symbol of symbols) {
-            try {
-                const data: any = await nseIndia.getEquityDetails(symbol);
-
-                result.push({
-                    symbol,
-                    open: data?.priceInfo?.open || 0,
-                    ltp: data?.priceInfo?.lastPrice || 0,
-                    high: data?.priceInfo?.intraDayHighLow?.max || 0,
-                    low: data?.priceInfo?.intraDayHighLow?.min || 0,
-                    prevClose: data?.priceInfo?.previousClose || 0,
-                    changePercent: data?.priceInfo?.pChange || 0
-                });
-
-            } catch (err) {
-                console.log(`Failed for ${symbol}`);
-            }
-        }
-
-        res.json({
-            success: true,
-            data: result
-        });
-
-    } catch (error) {
-        console.log(error);
-
-        res.status(500).json({
-            success: false,
-            error: "sector monitor failed"
-        });
-    }
+mainRouter.get('/api/test123', async (_req, res) => {
+    res.json({
+        success: true,
+        message: "test route working"
+    });
 });
-// ended here
 export { mainRouter }
