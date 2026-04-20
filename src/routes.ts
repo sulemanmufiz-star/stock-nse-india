@@ -2356,36 +2356,36 @@ mainRouter.get('/api/sector-monitor', async (_req, res) => {
 
         let allStocks: any[] = [];
 
-        for (const sector in sectorStocks) {
-            const symbols = sectorStocks[sector];
+for (const sector of Object.keys(sectorStocks) as (keyof typeof sectorStocks)[]) {
+    const symbols = sectorStocks[sector];
 
-            for (const symbol of symbols) {
-                try {
-                    const data: any = await nseIndia.getEquityDetails(symbol);
+    for (const symbol of symbols) {
+        try {
+            const data: any = await nseIndia.getEquityDetails(symbol);
 
-                    allStocks.push({
-                        sector,
-                        symbol,
-                        open: data?.priceInfo?.open || 0,
-                        ltp: data?.priceInfo?.lastPrice || 0,
-                        close: data?.priceInfo?.close || 0,
-                        high: data?.priceInfo?.intraDayHighLow?.max || 0,
-                        low: data?.priceInfo?.intraDayHighLow?.min || 0,
-                        prevClose: data?.priceInfo?.previousClose || 0,
-                        changePercent: Number(data?.priceInfo?.pChange || 0)
-                    });
+            allStocks.push({
+                sector,
+                symbol,
+                open: data?.priceInfo?.open || 0,
+                ltp: data?.priceInfo?.lastPrice || 0,
+                close: data?.priceInfo?.close || 0,
+                high: data?.priceInfo?.intraDayHighLow?.max || 0,
+                low: data?.priceInfo?.intraDayHighLow?.min || 0,
+                prevClose: data?.priceInfo?.previousClose || 0,
+                changePercent: Number(data?.priceInfo?.pChange || 0)
+            });
 
-                    await new Promise(resolve => setTimeout(resolve, 700));
+            await new Promise(resolve => setTimeout(resolve, 700));
 
-                } catch (error) {
-                    console.log(`Failed fetching ${symbol}`);
-                }
-            }
+        } catch (error) {
+            console.log(`Failed fetching ${symbol}`);
         }
+    }
+}
 
         let sectorRanking: any[] = [];
 
-        for (const sector in sectorStocks) {
+        for (const sector of Object.keys(sectorStocks) as (keyof typeof sectorStocks)[]) {
             const sectorData = allStocks
                 .filter(stock => stock.sector === sector)
                 .sort((a, b) => b.changePercent - a.changePercent)
