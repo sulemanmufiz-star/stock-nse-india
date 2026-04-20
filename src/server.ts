@@ -13,6 +13,7 @@ import { openapiSpecification } from './swaggerDocOptions'
 import path from 'path';
 import { mainRouter } from './routes'
 import cors from 'cors';
+import sectorMonitor from "./routes/sectorMonitor";
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -47,6 +48,13 @@ app.use(cors({
   allowedHeaders: corsHeaders,
   credentials: process.env.CORS_CREDENTIALS !== 'false'
 }));
+
+//route register custom
+
+
+
+app.use("/api/sector-monitor", sectorMonitor);
+
 
 // Add JSON body parsing middleware
 app.use(express.json());
