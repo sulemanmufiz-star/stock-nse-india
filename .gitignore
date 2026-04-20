@@ -35,7 +35,6 @@ bower_components
 .lock-wscript
 
 # Compiled binary addons (https://nodejs.org/api/addons.html)
-build/Release
 
 # Dependency directories
 node_modules/
@@ -104,7 +103,12 @@ dist
 .tern-port
 
 #build
-build/
+# First open .gitignore in VS Code and delete the line saying 'build'
+# Then:
+git add build/
+git add .gitignore
+git commit -m "Add pre-built files"
+git push origin master
 
 # MacOS store file
 .DS_Store
