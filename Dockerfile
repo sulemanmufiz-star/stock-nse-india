@@ -1,13 +1,17 @@
-FROM node:20
+FROM node:20-alpine
+
 WORKDIR /app
-COPY src/ src/
-COPY examples/ examples/
+
+COPY build/ build/
 COPY package.json ./
 COPY yarn.lock ./
-COPY tsconfig.json ./
+
 ENV TZ="Asia/Kolkata"
-RUN yarn install --ignore-engines
-RUN yarn build
 ENV PORT=3001
+ENV NODE_ENV=production
+
+RUN yarn install --production --ignore-engines
+
 EXPOSE 3001
-CMD yarn start
+
+CMD ["node", "build/server.js"]
