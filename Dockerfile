@@ -2,17 +2,17 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-COPY . .
+COPY build/ build/
+COPY src/ src/
+COPY package.json ./
+COPY yarn.lock ./
 
 ENV TZ="Asia/Kolkata"
 ENV NODE_ENV=production
 ENV PORT=3001
+ENV OPENAI_API_KEY=dummy-not-needed
 
-RUN yarn install --ignore-engines && \
-    NODE_OPTIONS="--max-old-space-size=4096" ./node_modules/typescript/bin/tsc && \
-    ./node_modules/copyfiles/copyfiles -f "./src/**/*.graphql" build/graphql-schema && \
-    rm -rf node_modules && \
-    yarn install --ignore-engines --production
+RUN yarn install --production --ignore-engines
 
 EXPOSE 3001
 
