@@ -6,7 +6,7 @@ COPY package.json ./
 COPY yarn.lock ./
 COPY tsconfig.json ./
 ENV TZ="Asia/Kolkata"
-RUN yarn install
+RUN yarn install --ignore-engines
 RUN yarn build
 ENV PORT=3001
 EXPOSE 3001
