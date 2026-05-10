@@ -1,0 +1,88 @@
+{
+  "_indices": {
+    "NIFTY 50":                 "NSE_INDEX|Nifty 50",
+    "NIFTY BANK":               "NSE_INDEX|Nifty Bank",
+    "NIFTY IT":                 "NSE_INDEX|Nifty IT",
+    "NIFTY FINANCIAL SERVICES": "NSE_INDEX|Nifty Fin Service",
+    "NIFTY MIDCAP SELECT":      "NSE_INDEX|Nifty Midcap Select",
+    "NIFTY NEXT 50":            "NSE_INDEX|Nifty Next 50"
+  },
+
+  "_index_stocks": {
+    "NIFTY 50":   [
+      "RELIANCE","TCS","INFY","HDFCBANK","ICICIBANK",
+      "BAJAJ-AUTO","M&M","NTPC","GRASIM","KOTAKBANK",
+      "SBIN","AXISBANK","LT","WIPRO","HCLTECH"
+    ],
+    "NIFTY BANK": [
+      "HDFCBANK","ICICIBANK","AXISBANK","KOTAKBANK","SBIN",
+      "INDUSINDBK","BANDHANBNK","IDFCFIRSTB","YESBANK","AUBANK",
+      "FEDERALBNK","PNB","BANKBARODA"
+    ],
+    "NIFTY IT": [
+      "TCS","INFY","WIPRO","HCLTECH","TECHM",
+      "OFSS","COFORGE","MPHASIS","LTIM","PERSISTENT"
+    ],
+    "NIFTY FINANCIAL SERVICES": [
+      "HDFCBANK","ICICIBANK","BAJFINANCE","SBIN","AXISBANK",
+      "KOTAKBANK","BAJAJFINSV","HDFCLIFE","SBILIFE","ICICIGI"
+    ],
+    "NIFTY MIDCAP SELECT": [
+      "POLICYBZR","GODREJPROP","FEDERALBNK","AUBANK","COFORGE",
+      "MPHASIS","LTIM","PERSISTENT","ABCAPITAL","SUPREMEIND"
+    ],
+    "NIFTY NEXT 50": [
+      "SIEMENS","HAVELLS","PIDILITIND","DABUR","MARICO",
+      "BERGEPAINT","COLPAL","MUTHOOTFIN","LUPIN","DRREDDY"
+    ]
+  },
+
+  "RELIANCE":   { "upstox": "NSE_EQ|INE002A01018", "ao": "2885" },
+  "TCS":        { "upstox": "NSE_EQ|INE467B01029", "ao": "11536" },
+  "INFY":       { "upstox": "NSE_EQ|INE009A01021", "ao": "1594" },
+  "HDFCBANK":   { "upstox": "NSE_EQ|INE040A01034", "ao": "1333" },
+  "ICICIBANK":  { "upstox": "NSE_EQ|INE090A01021", "ao": "4963" },
+  "BAJAJ-AUTO": { "upstox": "NSE_EQ|INE917I01010", "ao": "16669" },
+  "M&M":        { "upstox": "NSE_EQ|INE101A01026", "ao": "2031" },
+  "NTPC":       { "upstox": "NSE_EQ|INE733E01010", "ao": "11630" },
+  "GRASIM":     { "upstox": "NSE_EQ|INE047A01021", "ao": "1232" },
+  "KOTAKBANK":  { "upstox": "NSE_EQ|INE237A01028", "ao": "1922" },
+  "SBIN":       { "upstox": "NSE_EQ|INE062A01020", "ao": "3045" },
+  "AXISBANK":   { "upstox": "NSE_EQ|INE238A01034", "ao": "5900" },
+  "LT":         { "upstox": "NSE_EQ|INE018A01030", "ao": "11483" },
+  "WIPRO":      { "upstox": "NSE_EQ|INE075A01022", "ao": "3787" },
+  "HCLTECH":    { "upstox": "NSE_EQ|INE860A01027", "ao": "7229" },
+  "INDUSINDBK": { "upstox": "NSE_EQ|INE095A01012", "ao": "5258" },
+  "BANDHANBNK": { "upstox": "NSE_EQ|INE545U01014", "ao": "2263" },
+  "IDFCFIRSTB": { "upstox": "NSE_EQ|INE092T01019", "ao": "11184" },
+  "YESBANK":    { "upstox": "NSE_EQ|INE528G01035", "ao": "11915" },
+  "AUBANK":     { "upstox": "NSE_EQ|INE949L01017", "ao": "3981" },
+  "FEDERALBNK": { "upstox": "NSE_EQ|INE171A01029", "ao": "1023" },
+  "PNB":        { "upstox": "NSE_EQ|INE160A01022", "ao": "10666" },
+  "BANKBARODA": { "upstox": "NSE_EQ|INE028A01039", "ao": "4668" },
+  "TECHM":      { "upstox": "NSE_EQ|INE669C01036", "ao": "13538" },
+  "OFSS":       { "upstox": "NSE_EQ|INE881D01027", "ao": "10738" },
+  "COFORGE":    { "upstox": "NSE_EQ|INE591G01017", "ao": "3358" },
+  "MPHASIS":    { "upstox": "NSE_EQ|INE356A01018", "ao": "4503" },
+  "LTIM":       { "upstox": "NSE_EQ|INE214T01019", "ao": "17818" },
+  "PERSISTENT": { "upstox": "NSE_EQ|INE262H01021", "ao": "18365" },
+  "BAJFINANCE": { "upstox": "NSE_EQ|INE296A01024", "ao": "317" },
+  "BAJAJFINSV": { "upstox": "NSE_EQ|INE918I01026", "ao": "16675" },
+  "HDFCLIFE":   { "upstox": "NSE_EQ|INE795G01014", "ao": "467" },
+  "SBILIFE":    { "upstox": "NSE_EQ|INE123W01016", "ao": "21808" },
+  "ICICIGI":    { "upstox": "NSE_EQ|INE765G01017", "ao": "17" },
+  "POLICYBZR":  { "upstox": "NSE_EQ|INE417T01026", "ao": "543396" },
+  "GODREJPROP": { "upstox": "NSE_EQ|INE484J01027", "ao": "3932" },
+  "ABCAPITAL":  { "upstox": "NSE_EQ|INE674K01013", "ao": "5308" },
+  "SUPREMEIND": { "upstox": "NSE_EQ|INE195A01028", "ao": "3665" },
+  "SIEMENS":    { "upstox": "NSE_EQ|INE003A01024", "ao": "3150" },
+  "HAVELLS":    { "upstox": "NSE_EQ|INE176B01034", "ao": "3500" },
+  "PIDILITIND": { "upstox": "NSE_EQ|INE318A01026", "ao": "2664" },
+  "DABUR":      { "upstox": "NSE_EQ|INE016A01026", "ao": "772" },
+  "MARICO":     { "upstox": "NSE_EQ|INE196A01026", "ao": "4067" },
+  "BERGEPAINT": { "upstox": "NSE_EQ|INE463A01038", "ao": "1560" },
+  "COLPAL":     { "upstox": "NSE_EQ|INE259A01022", "ao": "1834" },
+  "MUTHOOTFIN": { "upstox": "NSE_EQ|INE414G01012", "ao": "3900" },
+  "LUPIN":      { "upstox": "NSE_EQ|INE326A01037", "ao": "10440" },
+  "DRREDDY":    { "upstox": "NSE_EQ|INE089A01023", "ao": "881" }
+}
